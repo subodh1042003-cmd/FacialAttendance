@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -144,6 +145,9 @@
             text-align: center;
 
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             overflow: hidden;
 
@@ -929,6 +933,8 @@
         }
 
         .developer-avatar {
+            overflow: hidden;
+            position: relative;
             width: 190px;
             height: 190px;
             margin: auto;
@@ -942,6 +948,13 @@
             font-weight: 800;
             box-shadow: 0 18px 40px rgba(37, 99, 235, 0.25);
             border: 7px solid white;
+        }
+
+        .developer-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .developer-badge {
@@ -1724,7 +1737,7 @@
     <div class="developer-card">
 
         <div class="developer-avatar">
-            SK
+            <img src="{% static 'images/subodh.jpg' %}" alt="Subodh Kumar">
         </div>
 
         <div class="developer-content">
