@@ -1,0 +1,708 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us | FaceAttend</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef6ff 0%, #dcecff 45%, #ffffff 100%);
+            color: #172033;
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            width: 100%;
+            padding: 17px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(15px);
+
+            box-shadow: 0 4px 25px rgba(0, 60, 140, 0.10);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #1261d6;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #111827;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #1261d6;
+        }
+
+        .admin-btn {
+            padding: 10px 18px;
+            background: #1261d6;
+            color: white !important;
+            border-radius: 25px;
+        }
+
+        .admin-btn:hover {
+            background: #0849aa !important;
+            transform: translateY(-2px);
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            position: relative;
+            min-height: 330px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.28), transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.22), transparent 25%),
+                linear-gradient(135deg, #0757c9, #1688f5, #42b6ff);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            color: white;
+            padding: 30px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.95;
+            max-width: 650px;
+            line-height: 1.7;
+            margin: auto;
+        }
+
+        /* Decorative circles */
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.10);
+        }
+
+        .circle.one {
+            width: 250px;
+            height: 250px;
+            left: -90px;
+            top: -70px;
+        }
+
+        .circle.two {
+            width: 330px;
+            height: 330px;
+            right: -120px;
+            bottom: -160px;
+        }
+
+        .circle.three {
+            width: 100px;
+            height: 100px;
+            right: 25%;
+            top: 30px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* Wave */
+
+        .wave {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: white;
+
+            clip-path: ellipse(75% 55% at 50% 100%);
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 45px 0 70px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: #172033;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #667085;
+            font-size: 15px;
+        }
+
+        /* ================= CONTACT CARDS ================= */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 22px;
+            padding: 32px 25px;
+            text-align: center;
+
+            box-shadow: 0 15px 45px rgba(28, 84, 150, 0.12);
+
+            border: 1px solid rgba(255,255,255,0.8);
+
+            transition: 0.35s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 50px rgba(28, 84, 150, 0.20);
+        }
+
+        .icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+
+            background: linear-gradient(135deg, #e5f1ff, #c9e2ff);
+        }
+
+        .contact-card h3 {
+            font-size: 20px;
+            color: #172033;
+            margin-bottom: 12px;
+        }
+
+        .contact-card p {
+            color: #667085;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .contact-card a {
+            color: #1261d6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= INFORMATION ================= */
+
+        .info-box {
+            background: white;
+            border-radius: 25px;
+            padding: 38px;
+
+            box-shadow: 0 15px 45px rgba(28, 84, 150, 0.12);
+
+            margin-bottom: 35px;
+        }
+
+        .info-box h2 {
+            font-size: 27px;
+            color: #1261d6;
+            margin-bottom: 22px;
+        }
+
+        .info-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .info-item {
+            padding: 20px;
+            background: #f5f9ff;
+            border-radius: 15px;
+            border-left: 4px solid #1261d6;
+        }
+
+        .info-item strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #172033;
+        }
+
+        .info-item span {
+            color: #667085;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ================= MAP ================= */
+
+        .map-box {
+            background: linear-gradient(135deg, #0757c9, #1597f4);
+            border-radius: 25px;
+            padding: 40px;
+
+            color: white;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+
+            box-shadow: 0 18px 45px rgba(0, 85, 190, 0.25);
+        }
+
+        .map-content h2 {
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .map-content p {
+            font-size: 14px;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        .map-btn {
+            display: inline-block;
+            white-space: nowrap;
+
+            padding: 14px 25px;
+
+            background: white;
+            color: #1261d6;
+
+            text-decoration: none;
+            font-weight: 700;
+
+            border-radius: 30px;
+
+            transition: 0.3s;
+        }
+
+        .map-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #101828;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        footer p {
+            font-size: 13px;
+            color: #98a2b3;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: 300px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .container {
+                width: 92%;
+                padding-top: 30px;
+            }
+
+            .info-box {
+                padding: 25px;
+            }
+
+            .map-box {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px;
+            }
+
+            .map-btn {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <a href="/" class="logo">
+            Face<span>Attend</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/about/">About</a>
+
+            <a href="/analysis/">Analysis</a>
+
+            <a href="/register-student/">Register Student</a>
+
+            <a href="/attendance/">Attendance</a>
+
+            <a href="/take-attendance/">Take Attendance</a>
+
+            <a href="/contact/" class="active">
+                Contact Us
+            </a>
+
+            <a href="/admin/" class="admin-btn">
+                Admin
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="circle one"></div>
+        <div class="circle two"></div>
+        <div class="circle three"></div>
+
+        <div class="hero-content">
+
+            <h1>Contact Us</h1>
+
+            <p>
+                Have questions about our Facial Recognition
+                Attendance System? We are here to help you.
+            </p>
+
+        </div>
+
+        <div class="wave"></div>
+
+    </section>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="container">
+
+        <div class="section-title">
+
+            <h2>Get In Touch</h2>
+
+            <p>
+                Contact us for admission, project information,
+                technical support or any other enquiry.
+            </p>
+
+        </div>
+
+
+        <!-- CONTACT CARDS -->
+
+        <div class="contact-grid">
+
+
+            <!-- ADDRESS -->
+
+            <div class="contact-card">
+
+                <div class="icon">
+                    📍
+                </div>
+
+                <h3>Address</h3>
+
+                <p>
+                    136 B.B. Ganguly Street,
+                    Kolkata – 700012,
+                    West Bengal, India
+                </p>
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="contact-card">
+
+                <div class="icon">
+                    📞
+                </div>
+
+                <h3>Phone</h3>
+
+                <p>
+
+                    <a href="tel:+919831552299">
+                        +91 98315 52299
+                    </a>
+
+                    <br><br>
+
+                    Monday – Saturday
+                    <br>
+                    10:00 AM – 5:00 PM
+
+                </p>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="contact-card">
+
+                <div class="icon">
+                    ✉️
+                </div>
+
+                <h3>Email</h3>
+
+                <p>
+
+                    <a href="mailto:enquiry@georgecollege.org">
+                        enquiry@georgecollege.org
+                    </a>
+
+                    <br><br>
+
+                    We normally respond
+                    within 1–2 working days.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= COLLEGE INFORMATION ================= -->
+
+        <div class="info-box">
+
+            <h2>
+                College Information
+            </h2>
+
+            <div class="info-content">
+
+
+                <div class="info-item">
+
+                    <strong>
+                        🏫 Institution
+                    </strong>
+
+                    <span>
+                        George Group of Colleges
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <strong>
+                        📚 Courses
+                    </strong>
+
+                    <span>
+                        BCA, BBA, Computer Applications
+                        and other professional programs.
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <strong>
+                        🚆 Nearby Location
+                    </strong>
+
+                    <span>
+                        Sealdah Railway Station is
+                        located nearby the college.
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <strong>
+                        💻 Project
+                    </strong>
+
+                    <span>
+                        Facial Recognition Attendance System
+                        for automated student attendance.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= MAP SECTION ================= -->
+
+        <div class="map-box">
+
+            <div class="map-content">
+
+                <h2>
+                    Find Us on Google Maps
+                </h2>
+
+                <p>
+                    Visit George Group of Colleges at
+                    136 B.B. Ganguly Street, Kolkata – 700012.
+                    Click the button to view the location.
+                </p>
+
+            </div>
+
+
+            <a
+                href="https://www.google.com/maps/search/?api=1&query=George+Group+of+Colleges+136+B.B.+Ganguly+Street+Kolkata+700012"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="map-btn"
+            >
+                View on Map →
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026
+            <strong>FaceAttend</strong>
+            — Facial Recognition Attendance System
+        </p>
+
+    </footer>
+
+</body>
+</html>

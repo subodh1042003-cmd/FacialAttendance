@@ -1,0 +1,1939 @@
+n
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register Student | FaceAttend</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef5ff,
+                    #f8fbff
+                );
+            color: #10213b;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 75px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255,255,255,.95);
+            border-bottom: 1px solid #e1eaf4;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .dashboard-btn {
+            padding: 11px 18px;
+            border-radius: 10px;
+            color: white !important;
+            background: #2563eb;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            text-align: center;
+            padding: 65px 20px 115px;
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(37,99,235,.14),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 10%,
+                    rgba(6,182,212,.14),
+                    transparent 30%
+                );
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 30px;
+            background: white;
+            color: #2563eb;
+            border: 1px solid #dbeafe;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            margin-top: 20px;
+            font-size: clamp(40px, 6vw, 62px);
+            letter-spacing: -3px;
+        }
+
+        .gradient {
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #0891b2
+                );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 18px auto 0;
+            color: #64748b;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            max-width: 1180px;
+            margin: -65px auto 90px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.08fr .92fr;
+            gap: 25px;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-card {
+            background: white;
+            border: 1px solid #e1eaf4;
+            border-radius: 28px;
+            padding: 38px;
+            box-shadow:
+                0 30px 70px
+                rgba(15,23,42,.10);
+        }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 28px;
+        }
+
+        .form-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 23px;
+        }
+
+        .form-header h2 {
+            font-size: 21px;
+        }
+
+        .form-header p {
+            margin-top: 4px;
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        .label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px 0 42px;
+            border: 1px solid #dce5ef;
+            border-radius: 12px;
+            outline: none;
+            background: #fbfdff;
+            font-size: 13px;
+            color: #1e293b;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            border-color: #60a5fa;
+            background: white;
+            box-shadow:
+                0 0 0 4px
+                rgba(37,99,235,.08);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* ================= PHOTO ================= */
+
+        .photo-box {
+            padding: 20px;
+            border-radius: 20px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #f8fbff,
+                    #f0f6ff
+                );
+            border: 1px solid #e1eaf5;
+        }
+
+        .photo-title {
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .photo-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .photo-option {
+            min-height: 125px;
+            border: 2px dashed #bdd0e5;
+            border-radius: 16px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .photo-option:hover {
+            border-color: #2563eb;
+            background: #f8fbff;
+            transform: translateY(-3px);
+            box-shadow:
+                0 12px 30px
+                rgba(37,99,235,.09);
+        }
+
+        .option-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eff6ff;
+            font-size: 21px;
+            margin-bottom: 9px;
+        }
+
+        .photo-option strong {
+            font-size: 11px;
+        }
+
+        .photo-option span {
+            margin-top: 4px;
+            color: #94a3b8;
+            font-size: 9px;
+        }
+
+        #photoInput {
+            display: none;
+        }
+
+        /* ================= CAMERA ================= */
+
+        .camera-panel {
+            display: none;
+            margin-top: 16px;
+            padding: 13px;
+            border-radius: 20px;
+            background: #06101f;
+            border: 1px solid #243c58;
+        }
+
+        .camera-panel.active {
+            display: block;
+        }
+
+        .camera-video-box {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #020617;
+            aspect-ratio: 4 / 3;
+        }
+
+        #cameraVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: scaleX(-1);
+            background: #020617;
+        }
+
+        .face-frame {
+            position: absolute;
+            width: 45%;
+            height: 65%;
+            left: 27.5%;
+            top: 17.5%;
+            border: 2px solid rgba(56,189,248,.9);
+            border-radius: 48%;
+            pointer-events: none;
+            box-shadow:
+                0 0 30px
+                rgba(56,189,248,.15);
+        }
+
+        .scan-line {
+            position: absolute;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            top: 30%;
+            background: #38bdf8;
+            box-shadow:
+                0 0 14px #38bdf8;
+            animation: scanning 2.2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scanning {
+
+            0% {
+                top: 25%;
+            }
+
+            50% {
+                top: 72%;
+            }
+
+            100% {
+                top: 25%;
+            }
+        }
+
+        .camera-status {
+            text-align: center;
+            color: #93c5fd;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 10px 0;
+        }
+
+        .camera-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .camera-btn {
+            height: 44px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .capture-btn {
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0891b2
+                );
+            color: white;
+        }
+
+        .close-btn {
+            background: #1e293b;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+        }
+
+        /* ================= CAMERA ERROR ================= */
+
+        .camera-message {
+            display: none;
+            margin-top: 12px;
+            padding: 13px;
+            border-radius: 12px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .camera-message.show {
+            display: block;
+        }
+
+        .camera-message strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 11px;
+        }
+
+        /* ================= PREVIEW ================= */
+
+        .preview {
+            display: none;
+            margin-top: 15px;
+            padding: 13px;
+            background: white;
+            border: 1px solid #dce7f3;
+            border-radius: 17px;
+        }
+
+        .preview.show {
+            display: block;
+        }
+
+        .preview-head {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .ready {
+            color: #16a34a;
+        }
+
+        #photoPreview {
+            display: block;
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 13px;
+            background: #f1f5f9;
+        }
+
+        .retake-btn {
+            width: 100%;
+            height: 42px;
+            margin-top: 9px;
+            border: 1px solid #dbe5f0;
+            border-radius: 10px;
+            background: #f8fafc;
+            color: #475569;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .retake-btn:hover {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .tip {
+            display: flex;
+            gap: 8px;
+            margin-top: 11px;
+            color: #64748b;
+            font-size: 9px;
+            line-height: 1.6;
+        }
+
+        /* ================= SUBMIT ================= */
+
+        .submit-btn {
+            width: 100%;
+            height: 54px;
+            margin-top: 22px;
+            border: none;
+            border-radius: 13px;
+            cursor: pointer;
+            background:
+                linear-gradient(
+                    100deg,
+                    #2563eb,
+                    #0891b2
+                );
+            color: white;
+            font-size: 13px;
+            font-weight: 800;
+            box-shadow:
+                0 13px 28px
+                rgba(37,99,235,.23);
+            transition: .25s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* ================= AI CARD ================= */
+
+        .ai-card {
+            overflow: hidden;
+            border-radius: 28px;
+            color: white;
+            background:
+                radial-gradient(
+                    circle at 80% 10%,
+                    rgba(56,189,248,.18),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    145deg,
+                    #06101e,
+                    #10243d
+                );
+            box-shadow:
+                0 30px 70px
+                rgba(15,23,42,.17);
+        }
+
+        .ai-top {
+            padding: 35px 32px 20px;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            padding: 7px 11px;
+            border-radius: 20px;
+            background: rgba(59,130,246,.14);
+            color: #93c5fd;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .ai-top h2 {
+            margin-top: 15px;
+            font-size: 28px;
+            line-height: 1.2;
+        }
+
+        .ai-top p {
+            margin-top: 12px;
+            color: #94a3b8;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .face-visual {
+            height: 250px;
+            margin: 8px 28px 22px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 22px;
+            background:
+                radial-gradient(
+                    circle,
+                    #193a5c,
+                    #081729 68%
+                );
+            border: 1px solid #263d59;
+        }
+
+        .face-shape {
+            position: absolute;
+            width: 145px;
+            height: 175px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            border: 2px solid #60a5fa;
+            border-radius: 48%;
+            opacity: .8;
+        }
+
+        .eye-left,
+        .eye-right {
+            position: absolute;
+            top: 67px;
+            width: 18px;
+            height: 7px;
+            border-top: 2px solid #60a5fa;
+        }
+
+        .eye-left {
+            left: 32px;
+        }
+
+        .eye-right {
+            right: 32px;
+        }
+
+        .nose-line {
+            position: absolute;
+            left: 50%;
+            top: 75px;
+            height: 42px;
+            width: 1px;
+            background: #60a5fa;
+        }
+
+        .mouth-line {
+            position: absolute;
+            left: 50%;
+            top: 126px;
+            transform: translateX(-50%);
+            width: 38px;
+            height: 10px;
+            border-bottom: 2px solid #60a5fa;
+            border-radius: 50%;
+        }
+
+        .ai-scan {
+            position: absolute;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            top: 30%;
+            background: #38bdf8;
+            box-shadow: 0 0 14px #38bdf8;
+            animation: scanning 2.2s infinite;
+        }
+
+        .ai-status {
+            position: absolute;
+            bottom: 17px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: rgba(4,13,25,.85);
+            border: 1px solid #2b4866;
+            color: #93c5fd;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .benefits {
+            padding: 5px 32px 32px;
+            display: grid;
+            gap: 11px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px;
+            border-radius: 13px;
+            border: 1px solid #213650;
+            background: rgba(255,255,255,.025);
+        }
+
+        .benefit-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(37,99,235,.15);
+            color: #60a5fa;
+        }
+
+        .benefit h4 {
+            font-size: 11px;
+        }
+
+        .benefit p {
+            margin-top: 3px;
+            color: #64748b;
+            font-size: 9px;
+        }
+
+        /* ================= STUDENTS ================= */
+
+        .students {
+            margin-top: 85px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .section-label {
+            color: #2563eb;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .section-header h2 {
+            margin-top: 7px;
+            font-size: 32px;
+        }
+
+        .count {
+            padding: 8px 13px;
+            border-radius: 20px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .students-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(3,1fr);
+            gap: 17px;
+        }
+
+        .student-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px;
+            border-radius: 20px;
+            background: white;
+            border: 1px solid #e4ebf4;
+            box-shadow:
+                0 13px 35px
+                rgba(15,23,42,.05);
+            transition: .25s;
+        }
+
+        .student-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .student-photo {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 17px;
+            border: 3px solid white;
+            background: #eaf1fa;
+            box-shadow:
+                0 7px 18px
+                rgba(15,23,42,.10);
+        }
+
+        .student-info {
+            min-width: 0;
+        }
+
+        .student-info h3 {
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .roll {
+            margin-top: 4px;
+            color: #2563eb;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .course {
+            margin-top: 5px;
+            color: #94a3b8;
+            font-size: 9px;
+        }
+
+        .empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 22px;
+            background: white;
+            border: 1px solid #e5ecf4;
+        }
+
+        .empty-icon {
+            font-size: 40px;
+        }
+
+        .empty h3 {
+            margin-top: 12px;
+        }
+
+        .empty p {
+            margin-top: 5px;
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            padding: 60px 7% 25px;
+            background: #060d18;
+            color: white;
+        }
+
+        .footer-grid {
+            max-width: 1150px;
+            margin: auto;
+            display: grid;
+            grid-template-columns:
+                1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-brand p {
+            max-width: 280px;
+            margin-top: 14px;
+            color: #64748b;
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .footer-title {
+            margin-bottom: 15px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: grid;
+            gap: 9px;
+            color: #64748b;
+            font-size: 11px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            max-width: 1150px;
+            margin: 40px auto 0;
+            padding-top: 18px;
+            border-top: 1px solid #1d2939;
+            color: #475569;
+            text-align: center;
+            font-size: 9px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .students-grid {
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .nav-links a:not(.dashboard-btn) {
+                display: none;
+            }
+
+            .hero {
+                padding:
+                    55px 20px 100px;
+            }
+
+            .form-card {
+                padding: 25px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .students-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <a href="/" class="logo">
+
+        <div class="logo-icon">
+            ◉
+        </div>
+
+        FaceAttend
+
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/about/">About</a>
+
+        <a href="/analysis/">Analysis</a>
+
+        <a href="/register/">Register</a>
+
+        <a href="/attendance/">Attendance</a>
+        <a href="/attendance/take/">Take Attendance</a>
+
+        <a href="/contact/">Contact</a>
+
+        <a
+            href="/dashboard/"
+            class="dashboard-btn">
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="badge">
+        SMART STUDENT REGISTRATION
+    </div>
+
+    <h1>
+
+        Create Your
+
+        <span class="gradient">
+            Digital Classroom
+        </span>
+
+    </h1>
+
+    <p>
+
+        Register student information and add a clear
+        face photo. FaceAttend will use the registered
+        profile for intelligent attendance recognition.
+
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <div class="main-grid">
+
+
+        <!-- ================= FORM ================= -->
+
+        <div class="form-card">
+
+
+            <div class="form-header">
+
+                <div class="form-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <h2>
+                        Register New Student
+                    </h2>
+
+                    <p>
+                        Add student information and face details
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                id="studentForm">
+
+                {% csrf_token %}
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label class="label">
+
+                        Student Name
+
+                        <span class="required">
+                            *
+                        </span>
+
+                    </label>
+
+
+                    <div class="input-wrap">
+
+                        <span class="input-icon">
+                            👤
+                        </span>
+
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter student's full name"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- ROLL -->
+
+                <div class="form-group">
+
+                    <label class="label">
+
+                        Roll Number
+
+                        <span class="required">
+                            *
+                        </span>
+
+                    </label>
+
+
+                    <div class="input-wrap">
+
+                        <span class="input-icon">
+                            🪪
+                        </span>
+
+                        <input
+                            type="text"
+                            name="roll_number"
+                            placeholder="Enter unique roll number"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label class="label">
+                        Email Address
+                    </label>
+
+
+                    <div class="input-wrap">
+
+                        <span class="input-icon">
+                            ✉
+                        </span>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="student@example.com"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- COURSE -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label class="label">
+                            Course
+                        </label>
+
+
+                        <div class="input-wrap">
+
+                            <span class="input-icon">
+                                🎓
+                            </span>
+
+                            <input
+                                type="text"
+                                name="course"
+                                value="BCA"
+                                placeholder="BCA"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SEMESTER -->
+
+                    <div class="form-group">
+
+                        <label class="label">
+                            Semester
+                        </label>
+
+
+                        <div class="input-wrap">
+
+                            <span class="input-icon">
+                                📚
+                            </span>
+
+                            <input
+                                type="text"
+                                name="semester"
+                                placeholder="5th Semester"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ================= PHOTO ================= -->
+
+                <div class="form-group">
+
+
+                    <label class="label">
+
+                        Face Recognition Photo
+
+                        <span class="required">
+                            *
+                        </span>
+
+                    </label>
+
+
+                    <div class="photo-box">
+
+
+                        <div class="photo-title">
+
+                            📸 Choose how you want to add the photo
+
+                        </div>
+
+
+                        <div class="photo-options">
+
+
+                            <!-- COMPUTER PHOTO -->
+
+                            <label
+                                class="photo-option"
+                                for="photoInput">
+
+
+                                <div class="option-icon">
+                                    📁
+                                </div>
+
+
+                                <strong>
+                                    Choose Photo
+                                </strong>
+
+
+                                <span>
+                                    From your computer
+                                </span>
+
+
+                            </label>
+
+
+                            <!-- CAMERA -->
+
+                            <button
+                                type="button"
+                                class="photo-option"
+                                id="openCameraButton"
+                                style="border-style:dashed;">
+
+                                <div class="option-icon">
+                                    📷
+                                </div>
+
+
+                                <strong>
+                                    Open Camera
+                                </strong>
+
+
+                                <span>
+                                    Use MacBook camera
+                                </span>
+
+
+                            </button>
+
+
+                        </div>
+
+
+                        <!-- FILE INPUT -->
+
+                        <input
+                            type="file"
+                            id="photoInput"
+                            name="photo"
+                            accept="image/jpeg,image/png,image/webp,image/*"
+                        >
+
+
+                        <!-- ================= CAMERA PANEL ================= -->
+
+                        <div
+                            class="camera-panel"
+                            id="cameraPanel">
+
+
+                            <div class="camera-video-box">
+
+
+                                <video
+                                    id="cameraVideo"
+                                    autoplay
+                                    muted
+                                    playsinline>
+                                </video>
+
+
+                                <div class="face-frame">
+                                </div>
+
+
+                                <div class="scan-line">
+                                </div>
+
+
+                            </div>
+
+
+                            <div
+                                class="camera-status"
+                                id="cameraStatus">
+
+                                Camera starting...
+
+                            </div>
+
+
+                            <div class="camera-buttons">
+
+
+                                <button
+                                    type="button"
+                                    class="camera-btn capture-btn"
+                                    id="captureButton">
+
+                                    📸 Capture Photo
+
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="camera-btn close-btn"
+                                    id="closeCameraButton">
+
+                                    ✕ Close Camera
+
+                                </button>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- ================= CAMERA MESSAGE ================= -->
+
+                        <div
+                            class="camera-message"
+                            id="cameraMessage">
+
+                            <strong id="cameraMessageTitle">
+                                Camera permission required
+                            </strong>
+
+                            <span id="cameraMessageText">
+                                Please allow camera access.
+                            </span>
+
+                        </div>
+
+
+                        <!-- ================= PREVIEW ================= -->
+
+                        <div
+                            class="preview"
+                            id="preview">
+
+
+                            <div class="preview-head">
+
+                                <span>
+                                    Photo Preview
+                                </span>
+
+                                <span class="ready">
+                                    ✓ Ready
+                                </span>
+
+                            </div>
+
+
+                            <img
+                                id="photoPreview"
+                                alt="Student photo preview"
+                            >
+
+
+                            <button
+                                type="button"
+                                class="retake-btn"
+                                id="retakeButton">
+
+                                🔄 Retake / Choose Another Photo
+
+                            </button>
+
+
+                        </div>
+
+
+                        <div class="tip">
+
+                            💡
+
+                            <span>
+
+                                For best facial recognition,
+                                use a front-facing photo with
+                                good lighting and only one face.
+
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="submit-btn">
+
+                    Register Student →
+                    
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+        <!-- ================= AI CARD ================= -->
+
+        <div class="ai-card">
+
+
+            <div class="ai-top">
+
+
+                <span class="ai-badge">
+                    AI FACE RECOGNITION
+                </span>
+
+
+                <h2>
+
+                    One photo.
+                    Smarter attendance.
+
+                </h2>
+
+
+                <p>
+
+                    Register the student's face once.
+                    FaceAttend can then use the camera
+                    to recognize the student automatically.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="face-visual">
+
+
+                <div class="face-shape">
+
+                    <div class="eye-left">
+                    </div>
+
+                    <div class="eye-right">
+                    </div>
+
+                    <div class="nose-line">
+                    </div>
+
+                    <div class="mouth-line">
+                    </div>
+
+                </div>
+
+
+                <div class="ai-scan">
+                </div>
+
+
+                <div class="ai-status">
+
+                    ◉ FACE SCAN READY
+
+                </div>
+
+
+            </div>
+
+
+            <div class="benefits">
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Automatic Identification
+                        </h4>
+
+                        <p>
+                            Identify registered students
+                            using facial features.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        ⚡
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Fast Attendance
+                        </h4>
+
+                        <p>
+                            Reduce manual attendance work.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        🔒
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Organized Records
+                        </h4>
+
+                        <p>
+                            Keep student attendance
+                            records organized.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= STUDENTS ================= -->
+
+    <section class="students">
+
+
+        <div class="section-header">
+
+
+            <div>
+
+                <div class="section-label">
+                    STUDENT DIRECTORY
+                </div>
+
+                <h2>
+                    Registered Students
+                </h2>
+
+            </div>
+
+
+            <div class="count">
+
+                {{ students|length }}
+
+                STUDENTS
+
+            </div>
+
+
+        </div>
+
+
+        <div class="students-grid">
+
+    {% for student in students %}
+
+    <div class="student-card">
+
+        {% if student.photo %}
+            <img
+                src="{{ student.photo.url }}"
+                alt="{{ student.name }}"
+                class="student-photo"
+            >
+        {% else %}
+            <div
+                class="student-photo"
+                style="
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:25px;
+                ">
+                👤
+            </div>
+        {% endif %}
+
+        <div class="student-info">
+
+            <h3>{{ student.name }}</h3>
+
+            <div class="roll">
+                Roll: {{ student.roll_number }}
+            </div>
+
+            <div class="course">
+                {{ student.course }}
+                {% if student.semester %}
+                    • {{ student.semester }}
+                {% endif %}
+            </div>
+
+            <div style="
+                display:flex;
+                gap:10px;
+                margin-top:16px;
+            ">
+
+                <a
+                    href="{% url 'edit_student' student.id %}"
+                    style="
+                        flex:1;
+                        text-align:center;
+                        text-decoration:none;
+                        padding:10px;
+                        border-radius:10px;
+                        background:#eff6ff;
+                        color:#2563eb;
+                        border:1px solid #bfdbfe;
+                        font-weight:700;
+                    "
+                >
+                    ✏️ Edit
+                </a>
+
+                <form
+                    method="POST"
+                    action="{% url 'delete_student' student.id %}"
+                    style="flex:1;margin:0;"
+                    onsubmit="return confirm('Delete {{ student.name }}?');"
+                >
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        style="
+                            width:100%;
+                            padding:10px;
+                            border-radius:10px;
+                            background:#fef2f2;
+                            color:#dc2626;
+                            border:1px solid #fecaca;
+                            font-weight:700;
+                            cursor:pointer;
+                        "
+                    >
+                        🗑️ Delete
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="empty">
+        <div class="empty-icon">👨‍🎓</div>
+        <h3>No Students Registered Yet</h3>
+        <p>Registered students will appear here.</p>
+    </div>
+
+    {% endfor %}
+
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const openCameraButton = document.getElementById("openCameraButton");
+    const closeCameraButton = document.getElementById("closeCameraButton");
+    const captureButton = document.getElementById("captureButton");
+
+    const cameraPanel = document.getElementById("cameraPanel");
+    const cameraVideo = document.getElementById("cameraVideo");
+    const cameraStatus = document.getElementById("cameraStatus");
+
+    const photoInput = document.getElementById("photoInput");
+    const preview = document.getElementById("preview");
+    const cameraMessage = document.getElementById("cameraMessage");
+    const cameraMessageTitle = document.getElementById("cameraMessageTitle");
+    const cameraMessageText = document.getElementById("cameraMessageText");
+
+    let cameraStream = null;
+
+    function stopCamera() {
+        if (cameraStream) {
+            cameraStream.getTracks().forEach(track => track.stop());
+            cameraStream = null;
+        }
+
+        if (cameraVideo) {
+            cameraVideo.srcObject = null;
+        }
+    }
+
+    if (openCameraButton) {
+        openCameraButton.addEventListener("click", async function () {
+
+            cameraMessage.style.display = "none";
+            cameraPanel.style.display = "block";
+            cameraStatus.textContent = "Starting camera...";
+
+            try {
+
+                if (!navigator.mediaDevices ||
+                    !navigator.mediaDevices.getUserMedia) {
+
+                    throw new Error("Camera API is not supported by this browser.");
+                }
+
+                cameraStream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode: "user",
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    },
+                    audio: false
+                });
+
+                cameraVideo.srcObject = cameraStream;
+
+                await cameraVideo.play();
+
+                cameraStatus.textContent = "Camera ready — position your face inside the frame.";
+
+            } catch (error) {
+
+                cameraPanel.style.display = "none";
+                cameraMessage.style.display = "block";
+
+                cameraMessageTitle.textContent = "Camera access was denied";
+                cameraMessageText.textContent =
+                    "Please allow camera access for this page in Chrome, then click Open Camera again.";
+
+                console.error("Camera error:", error);
+
+            }
+
+        });
+    }
+
+    if (closeCameraButton) {
+        closeCameraButton.addEventListener("click", function () {
+            stopCamera();
+            cameraPanel.style.display = "none";
+            cameraStatus.textContent = "Camera closed.";
+        });
+    }
+
+    if (captureButton) {
+        captureButton.addEventListener("click", function () {
+
+            if (!cameraVideo || !cameraVideo.videoWidth) {
+                cameraStatus.textContent = "Camera is not ready.";
+                return;
+            }
+
+            const canvas = document.createElement("canvas");
+
+            canvas.width = cameraVideo.videoWidth;
+            canvas.height = cameraVideo.videoHeight;
+
+            const context = canvas.getContext("2d");
+
+            context.drawImage(
+                cameraVideo,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+            canvas.toBlob(function (blob) {
+
+                if (!blob) {
+                    cameraStatus.textContent = "Could not capture photo.";
+                    return;
+                }
+
+                const file = new File(
+                    [blob],
+                    "camera_photo.jpg",
+                    { type: "image/jpeg" }
+                );
+
+                const dataTransfer = new DataTransfer();
+
+                dataTransfer.items.add(file);
+
+                photoInput.files = dataTransfer.files;
+
+                preview.innerHTML =
+                    '<img src="' +
+                    canvas.toDataURL("image/jpeg") +
+                    '" style="max-width:100%;border-radius:15px;">';
+
+                preview.style.display = "block";
+
+                cameraStatus.textContent = "Photo captured successfully.";
+
+                stopCamera();
+
+            }, "image/jpeg", 0.92);
+
+        });
+    }
+
+});
+</script>
+
+</body>
+</html>

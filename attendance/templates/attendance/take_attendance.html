@@ -1,0 +1,801 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Automatic Face Attendance</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #07111f;
+            color: white;
+        }
+
+        .navbar {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            background: #0b1728;
+            border-bottom: 1px solid #20324a;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .title p {
+            color: #94a3b8;
+        }
+
+        .camera-card {
+            background: #0d1b2d;
+            border: 1px solid #233a55;
+            border-radius: 22px;
+            padding: 25px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+        }
+
+        .camera-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #000;
+        }
+
+        video {
+            width: 100%;
+            display: block;
+            transform: scaleX(-1);
+        }
+
+        .scan-box {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 280px;
+            height: 330px;
+            transform: translate(-50%, -50%);
+            border: 3px solid #38bdf8;
+            border-radius: 25px;
+            box-shadow: 0 0 30px rgba(56,189,248,0.5);
+            pointer-events: none;
+        }
+
+        .scan-line {
+            position: absolute;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: #22d3ee;
+            box-shadow: 0 0 15px #22d3ee;
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% {
+                top: 15%;
+            }
+
+            50% {
+                top: 85%;
+            }
+
+            100% {
+                top: 15%;
+            }
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 14px;
+            text-align: center;
+            background: #111f33;
+            color: #cbd5e1;
+        }
+
+        .status.success {
+            background: #06351f;
+            color: #4ade80;
+        }
+
+        .status.error {
+            background: #3b1010;
+            color: #f87171;
+        }
+
+        .status.scanning {
+            background: #082f49;
+            color: #38bdf8;
+        }
+
+        .attendance-table {
+            margin-top: 35px;
+            background: #0d1b2d;
+            border: 1px solid #233a55;
+            border-radius: 20px;
+            padding: 25px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #233a55;
+        }
+
+        th {
+            color: #38bdf8;
+        }
+
+        td {
+            color: #cbd5e1;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #064e3b;
+            color: #4ade80;
+            font-size: 13px;
+        }
+
+        canvas {
+            display: none;
+        }
+
+        .info {
+            text-align: center;
+            color: #64748b;
+            margin-top: 18px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                font-size: 13px;
+            }
+
+            .title h1 {
+                font-size: 28px;
+            }
+
+            .scan-box {
+                width: 190px;
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+{% csrf_token %}
+
+<nav class="navbar">
+
+    <div class="logo">
+        Face Attendance
+    </div>
+
+    <div class="nav-links">
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'register_student' %}">Students</a>
+        <a href="{% url 'attendance_list' %}">Attendance</a>
+        <a href="/attendance/take/">Take Attendance</a>
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="title">
+
+        <h1>Automatic Face Attendance</h1>
+
+        <p>
+            Camera is scanning automatically. Please look at the camera.
+        </p>
+
+    </div>
+
+
+    <div class="camera-card">
+
+        <div class="camera-wrapper">
+
+            <video id="camera" autoplay playsinline></video>
+
+            <div class="scan-box">
+
+                <div class="scan-line"></div>
+
+            </div>
+
+        </div>
+
+
+        <div id="status" class="status scanning">
+
+            Starting camera and face scanning...
+
+        </div>
+
+        <div class="info">
+
+            Attendance will be marked automatically when your registered face is recognized.
+
+        </div>
+
+    </div>
+
+
+    <div class="attendance-table">
+
+        <h2>Today's Attendance</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Student</th>
+                    <th>Roll Number</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for attendance in today_attendance %}
+
+                <tr>
+
+                    <td>
+                        {{ attendance.student.name }}
+                    </td>
+
+                    <td>
+                        {{ attendance.student.roll_number }}
+                    </td>
+
+                    <td>
+                        {{ attendance.date }}
+                    </td>
+
+                    <td>
+                        {{ attendance.time }}
+                    </td>
+
+                    <td>
+                        <span class="badge">
+                            {{ attendance.status }}
+                        </span>
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5" style="text-align:center;">
+                        No attendance marked today.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<canvas id="canvas"></canvas>
+
+
+<script>
+
+const video = document.getElementById("camera");
+const canvas = document.getElementById("canvas");
+const statusBox = document.getElementById("status");
+
+let cameraStream = null;
+let scanning = false;
+let processing = false;
+let lastScanTime = 0;
+
+
+/* -----------------------------
+   CSRF TOKEN
+----------------------------- */
+
+function getCookie(name) {
+
+    let cookieValue = null;
+
+    if (document.cookie && document.cookie !== "") {
+
+        const cookies = document.cookie.split(";");
+
+        for (let cookie of cookies) {
+
+            cookie = cookie.trim();
+
+            if (cookie.substring(0, name.length + 1) === (name + "=")) {
+
+                cookieValue = decodeURIComponent(
+                    cookie.substring(name.length + 1)
+                );
+
+                break;
+            }
+        }
+    }
+
+    return cookieValue;
+}
+
+
+/* -----------------------------
+   STATUS
+----------------------------- */
+
+function setStatus(message, type) {
+
+    statusBox.textContent = message;
+
+    statusBox.className = "status " + type;
+
+}
+
+
+/* -----------------------------
+   START CAMERA
+----------------------------- */
+
+async function startCamera() {
+
+    try {
+
+        cameraStream = await navigator.mediaDevices.getUserMedia({
+
+            video: {
+                facingMode: "user",
+                width: {
+                    ideal: 640
+                },
+                height: {
+                    ideal: 480
+                }
+            },
+
+            audio: false
+
+        });
+
+
+        video.srcObject = cameraStream;
+
+        scanning = true;
+
+        setStatus(
+            "Camera active — scanning for face...",
+            "scanning"
+        );
+
+
+        setTimeout(() => {
+
+            scanFace();
+
+        }, 1500);
+
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        setStatus(
+            "Camera access denied. Please allow camera permission in Chrome.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* -----------------------------
+   CAPTURE IMAGE
+----------------------------- */
+
+function captureImage() {
+
+    if (
+        video.videoWidth === 0 ||
+        video.videoHeight === 0
+    ) {
+
+        return null;
+
+    }
+
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+
+    const context = canvas.getContext("2d");
+
+
+    context.drawImage(
+        video,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    return canvas.toDataURL(
+        "image/jpeg",
+        0.90
+    );
+
+}
+
+
+/* -----------------------------
+   SEND IMAGE TO DJANGO
+----------------------------- */
+
+async function sendForRecognition(imageData) {
+
+    if (processing) {
+        return;
+    }
+
+    processing = true;
+
+    setStatus(
+        "Face detected — recognizing...",
+        "scanning"
+    );
+
+    try {
+
+        const blob = await fetch(imageData).then(
+            response => response.blob()
+        );
+
+        const formData = new FormData();
+
+        formData.append(
+            "image",
+            blob,
+            "attendance.jpg"
+        );
+
+        const response = await fetch(
+            "{% url 'mark_attendance_from_camera' %}",
+            {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                },
+                body: formData
+            }
+        );
+
+        const data = await response.json();
+
+        /*
+         * FIRST SCAN
+         * Automatically marks IN.
+         */
+        if (data.success && data.action === "in") {
+
+            setStatus(
+                data.message +
+                " | Match score: " +
+                data.score +
+                " | Camera will keep scanning for OUT.",
+                "success"
+            );
+
+            /*
+             * Do NOT stop scanning.
+             * Do NOT reload the page.
+             *
+             * Backend will allow OUT only after 5 minutes.
+             */
+            processing = false;
+
+            setTimeout(() => {
+
+                if (scanning) {
+
+                    setStatus(
+                        "IN recorded. Waiting for 5 minutes before OUT...",
+                        "scanning"
+                    );
+
+                    scanFace();
+                }
+
+            }, 3000);
+
+            return;
+        }
+
+
+        /*
+         * OUT successfully marked.
+         */
+        if (data.success && data.action === "out") {
+
+            setStatus(
+                data.message +
+                " | Match score: " +
+                data.score,
+                "success"
+            );
+
+            /*
+             * OUT is complete.
+             * Stop further scanning.
+             */
+            scanning = false;
+            processing = false;
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+
+            return;
+        }
+
+
+        /*
+         * Already completed today.
+         */
+        if (data.success && data.action === "completed") {
+
+            setStatus(
+                data.message,
+                "success"
+            );
+
+            scanning = false;
+            processing = false;
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+
+            return;
+        }
+
+
+        /*
+         * Face recognized but 5 minutes
+         * are not completed yet.
+         */
+        if (!data.success && data.action === "waiting") {
+
+            setStatus(
+                data.message +
+                " Camera is still scanning...",
+                "scanning"
+            );
+
+            processing = false;
+
+            setTimeout(() => {
+
+                if (scanning) {
+                    scanFace();
+                }
+
+            }, 2500);
+
+            return;
+        }
+
+
+        /*
+         * Face not recognized / no face detected.
+         */
+        setStatus(
+            data.message,
+            "error"
+        );
+
+        processing = false;
+
+        setTimeout(() => {
+
+            if (scanning) {
+
+                setStatus(
+                    "Scanning again...",
+                    "scanning"
+                );
+
+                scanFace();
+            }
+
+        }, 1500);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        setStatus(
+            "Server error while recognizing face.",
+            "error"
+        );
+
+        processing = false;
+
+        setTimeout(() => {
+
+            if (scanning) {
+                scanFace();
+            }
+
+        }, 2000);
+    }
+}
+
+
+/* -----------------------------
+   AUTOMATIC FACE SCANNING
+----------------------------- */
+
+function scanFace() {
+
+    if (!scanning || processing) {
+        return;
+    }
+
+    const now = Date.now();
+
+    if (now - lastScanTime < 2500) {
+
+        setTimeout(
+            scanFace,
+            500
+        );
+
+        return;
+    }
+
+    lastScanTime = now;
+
+    const imageData = captureImage();
+
+    if (!imageData) {
+
+        setTimeout(
+            scanFace,
+            1000
+        );
+
+        return;
+    }
+
+    sendForRecognition(imageData);
+}
+
+
+/* -----------------------------
+   START
+----------------------------- */
+
+/* -----------------------------
+   START
+----------------------------- */
+
+window.addEventListener(
+    "load",
+    startCamera
+);
+
+
+/* -----------------------------
+   STOP CAMERA
+----------------------------- */
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        if (cameraStream) {
+
+            cameraStream
+                .getTracks()
+                .forEach(
+                    track => track.stop()
+                );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

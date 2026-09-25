@@ -1,0 +1,2116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FaceAttend | Smart Facial Recognition Attendance</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #102044;
+            background: #ffffff;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 76px;
+            padding: 0 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+            z-index: 999;
+
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid #e7edf7;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            text-decoration: none;
+            color: #111827;
+
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-size: 21px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1769ff,
+                    #6048e8
+                );
+
+            box-shadow:
+                0 8px 20px rgba(37,99,235,0.25);
+        }
+
+        .brand span {
+            color: #2167ee;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+
+            font-size: 13px;
+            font-weight: 650;
+
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: #2167ee;
+        }
+
+        .admin {
+            padding: 11px 20px;
+
+            border-radius: 10px;
+
+            color: white !important;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            box-shadow:
+                0 8px 20px rgba(37,99,235,0.22);
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 650px;
+
+            padding: 75px 7% 80px;
+
+            display: flex;
+            align-items: center;
+            gap: 30px;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 82% 22%,
+                    rgba(79,70,229,0.15),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 8% 80%,
+                    rgba(37,99,235,0.12),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f9fcff,
+                    #edf5ff
+                );
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            right: -170px;
+            bottom: -280px;
+
+            border-radius: 50%;
+
+            background: rgba(96,165,250,0.15);
+        }
+
+        .hero-content {
+            width: 53%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 9px 16px;
+
+            margin-bottom: 20px;
+
+            border-radius: 30px;
+
+            background: #dceaff;
+            color: #1556c9;
+
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #2470ff;
+
+            box-shadow:
+                0 0 0 5px rgba(37,99,235,0.10);
+        }
+
+        .hero h1 {
+            font-size: 58px;
+            line-height: 1.08;
+
+            letter-spacing: -2px;
+
+            color: #0d1933;
+
+            margin-bottom: 23px;
+        }
+
+        .hero h1 span {
+            background:
+                linear-gradient(
+                    90deg,
+                    #1769ff,
+                    #6546e8
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text {
+            max-width: 650px;
+
+            color: #64748b;
+
+            font-size: 17px;
+            line-height: 1.75;
+
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 13px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            padding: 14px 23px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 750;
+
+            transition: 0.25s;
+        }
+
+        .btn-primary {
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1769ff,
+                    #385fe8
+                );
+
+            box-shadow:
+                0 12px 27px rgba(37,99,235,0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            color: #1d5dd1;
+
+            background: white;
+
+            border: 1px solid #d9e3f1;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px rgba(15,23,42,0.08);
+        }
+
+        /* ================= FACE VISUAL ================= */
+
+        .hero-visual {
+            width: 47%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+        }
+
+        .face-card {
+            width: 350px;
+            height: 400px;
+
+            position: relative;
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #10235e,
+                    #1769dd 65%,
+                    #6246df
+                );
+
+            box-shadow:
+                0 35px 80px rgba(37,99,235,0.28);
+        }
+
+        .grid {
+            position: absolute;
+            inset: 0;
+
+            opacity: 0.45;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.10) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.10) 1px,
+                    transparent 1px
+                );
+
+            background-size: 34px 34px;
+        }
+
+        .scan-ring {
+            position: absolute;
+
+            width: 230px;
+            height: 230px;
+
+            left: 60px;
+            top: 55px;
+
+            border-radius: 50%;
+
+            border:
+                2px solid rgba(255,255,255,0.82);
+
+            box-shadow:
+                0 0 35px rgba(147,197,253,0.25);
+        }
+
+        .face-symbol {
+            position: absolute;
+
+            width: 120px;
+            height: 150px;
+
+            left: 115px;
+            top: 85px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 105px;
+
+            filter:
+                drop-shadow(
+                    0 0 15px rgba(255,255,255,0.35)
+                );
+        }
+
+        .scan {
+            position: absolute;
+
+            left: 45px;
+            right: 45px;
+
+            top: 168px;
+
+            height: 2px;
+
+            background: #8fd0ff;
+
+            box-shadow:
+                0 0 16px #8fd0ff;
+        }
+
+        .verified {
+            position: absolute;
+
+            top: 20px;
+            right: 20px;
+
+            padding: 7px 11px;
+
+            border-radius: 20px;
+
+            background: rgba(22,163,74,0.22);
+
+            color: #9affba;
+
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .result {
+            position: absolute;
+
+            left: 22px;
+            right: 22px;
+            bottom: 22px;
+
+            padding: 19px;
+
+            border-radius: 17px;
+
+            background:
+                rgba(7,19,52,0.78);
+
+            backdrop-filter: blur(15px);
+
+            color: white;
+        }
+
+        .result-small {
+            color: #9bc8ff;
+
+            font-size: 10px;
+            font-weight: 700;
+
+            margin-bottom: 6px;
+        }
+
+        .result h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .result p {
+            color: #c9d7eb;
+            font-size: 11px;
+        }
+
+        /* floating dots */
+
+        .dot {
+            position: absolute;
+
+            width: 16px;
+            height: 16px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #54a6ff,
+                    #7352ef
+                );
+        }
+
+        .dot1 {
+            right: 4%;
+            top: 25%;
+        }
+
+        .dot2 {
+            left: 48%;
+            bottom: 15%;
+            width: 12px;
+            height: 12px;
+        }
+
+        /* ================= BENEFITS ================= */
+
+        .benefits {
+            width: 88%;
+
+            margin: -35px auto 0;
+
+            position: relative;
+            z-index: 5;
+
+            padding: 22px 30px;
+
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+
+            background: rgba(255,255,255,0.94);
+
+            border: 1px solid #e2ebf7;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 18px 50px rgba(24,73,140,0.12);
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            padding: 7px 20px;
+
+            border-right: 1px solid #e4ebf5;
+        }
+
+        .benefit:last-child {
+            border-right: none;
+        }
+
+        .benefit-icon {
+            min-width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: white;
+            font-size: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2580ff,
+                    #6350ed
+                );
+        }
+
+        .benefit h4 {
+            color: #123a82;
+            font-size: 13px;
+
+            margin-bottom: 3px;
+        }
+
+        .benefit p {
+            color: #8190a7;
+            font-size: 10px;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .section {
+            padding: 90px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+
+            max-width: 700px;
+
+            margin: auto auto 45px;
+        }
+
+        .label {
+            display: inline-block;
+
+            padding: 6px 13px;
+
+            border-radius: 20px;
+
+            background: #e5f0ff;
+
+            color: #2167e8;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 11px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+
+            color: #102044;
+
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #718096;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+        .feature-grid {
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 20px;
+        }
+
+        .feature {
+            padding: 29px;
+
+            border-radius: 18px;
+
+            background: white;
+
+            border: 1px solid #e6edf6;
+
+            box-shadow:
+                0 7px 25px rgba(15,23,42,0.035);
+
+            transition: 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-7px);
+
+            border-color: #c9dcff;
+
+            box-shadow:
+                0 20px 45px rgba(30,73,150,0.10);
+        }
+
+        .feature-icon {
+            width: 54px;
+            height: 54px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 15px;
+
+            background: #edf5ff;
+
+            font-size: 24px;
+        }
+
+        .feature h3 {
+            color: #172554;
+
+            font-size: 18px;
+
+            margin-bottom: 9px;
+        }
+
+        .feature p {
+            color: #718096;
+
+            font-size: 13px;
+
+            line-height: 1.65;
+        }
+
+        /* ================= IMPACT ================= */
+
+        .impact {
+            padding: 70px 7%;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #124ba9,
+                    #145bd0,
+                    #4037a9
+                );
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .impact::before {
+            content: "";
+
+            position: absolute;
+
+            width: 600px;
+            height: 300px;
+
+            right: -150px;
+            bottom: -180px;
+
+            border-radius: 50%;
+
+            border: 70px solid rgba(255,255,255,0.06);
+        }
+
+        .impact-title {
+            text-align: center;
+
+            margin-bottom: 35px;
+
+            position: relative;
+        }
+
+        .impact-title h2 {
+            font-size: 28px;
+
+            margin-bottom: 7px;
+        }
+
+        .impact-title p {
+            color: #c9dcff;
+            font-size: 13px;
+        }
+
+        .impact-grid {
+            max-width: 950px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            position: relative;
+        }
+
+        .impact-card {
+            text-align: center;
+
+            padding: 15px;
+
+            border-right:
+                1px solid rgba(255,255,255,0.18);
+        }
+
+        .impact-card:last-child {
+            border-right: none;
+        }
+
+        .impact-number {
+            font-size: 32px;
+
+            font-weight: 800;
+
+            margin-bottom: 5px;
+        }
+
+        .impact-card p {
+            color: #c7d8f5;
+            font-size: 12px;
+        }
+
+        /* ================= HOW IT WORKS ================= */
+
+        .steps {
+            max-width: 1100px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 20px;
+        }
+
+        .step {
+            text-align: center;
+
+            padding: 28px;
+
+            border-radius: 18px;
+
+            background: #f8fbff;
+
+            border: 1px solid #e4edf9;
+        }
+
+        .step-number {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: white;
+
+            font-weight: 800;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #6350e8
+                );
+        }
+
+        .step h3 {
+            font-size: 17px;
+
+            color: #172554;
+
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #718096;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        /* ================= DASHBOARD ================= */
+
+        .dashboard-section {
+            padding: 85px 7%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0f7ff,
+                    #f8faff
+                );
+        }
+
+        .dashboard {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: 0.8fr 1.2fr;
+
+            gap: 45px;
+
+            align-items: center;
+        }
+
+        .dashboard-text h2 {
+            color: #102044;
+
+            font-size: 35px;
+
+            margin-bottom: 15px;
+        }
+
+        .dashboard-text p {
+            color: #718096;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+            margin-bottom: 22px;
+        }
+
+        .checks {
+            list-style: none;
+        }
+
+        .checks li {
+            margin-bottom: 11px;
+
+            color: #40516d;
+
+            font-size: 13px;
+        }
+
+        .checks li::before {
+            content: "✓";
+
+            color: #16a34a;
+
+            font-weight: 900;
+
+            margin-right: 9px;
+        }
+
+        .dashboard-card {
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 20px;
+
+            border: 1px solid #dfebfa;
+
+            box-shadow:
+                0 20px 50px rgba(30,70,140,0.12);
+        }
+
+        .dashboard-head {
+            display: flex;
+            justify-content: space-between;
+
+            padding-bottom: 17px;
+
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .dashboard-head strong {
+            color: #162447;
+            font-size: 14px;
+        }
+
+        .live {
+            color: #16a34a;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+        .student-row {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 15px 3px;
+
+            border-bottom: 1px solid #f0f3f7;
+        }
+
+        .student {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #e5efff;
+        }
+
+        .student strong {
+            display: block;
+
+            color: #334155;
+
+            font-size: 12px;
+        }
+
+        .student small {
+            color: #94a3b8;
+
+            font-size: 9px;
+        }
+
+        .present {
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            font-size: 9px;
+
+            font-weight: 800;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            width: 86%;
+
+            margin: 70px auto;
+
+            padding: 48px;
+
+            border-radius: 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 25px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1559c9,
+                    #3730a3
+                );
+
+            box-shadow:
+                0 25px 55px rgba(37,75,170,0.20);
+        }
+
+        .cta h2 {
+            font-size: 28px;
+
+            margin-bottom: 6px;
+        }
+
+        .cta p {
+            color: #cddcff;
+
+            font-size: 12px;
+        }
+
+        .cta a {
+            padding: 13px 23px;
+
+            background: white;
+
+            color: #1d4ed8;
+
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            padding: 45px 7% 22px;
+
+            color: #94a3b8;
+
+            background: #0c1831;
+        }
+
+        .footer-content {
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr 1fr 1fr;
+
+            gap: 40px;
+
+            padding-bottom: 30px;
+
+            border-bottom: 1px solid #20304d;
+        }
+
+        .footer-brand h3 {
+            color: white;
+
+            font-size: 20px;
+
+            margin-bottom: 9px;
+        }
+
+        .footer-brand p {
+            max-width: 300px;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+        }
+
+        .footer-col h4 {
+            color: white;
+
+            font-size: 12px;
+
+            margin-bottom: 14px;
+        }
+
+        .footer-col a {
+            display: block;
+
+            color: #94a3b8;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            margin-bottom: 8px;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .copyright {
+            padding-top: 20px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 10px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 1000px) {
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .hero h1 {
+                font-size: 46px;
+            }
+
+            .face-card {
+                width: 300px;
+                height: 360px;
+            }
+
+            .scan-ring {
+                width: 190px;
+                height: 190px;
+
+                left: 55px;
+            }
+
+            .face-symbol {
+                left: 90px;
+            }
+
+            .feature-grid {
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+        }
+
+        @media(max-width: 800px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+
+                text-align: center;
+
+                padding-top: 60px;
+            }
+
+            .hero-content,
+            .hero-visual {
+                width: 100%;
+            }
+
+            .hero-text {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .benefits {
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+            .benefit:nth-child(2) {
+                border-right: none;
+            }
+
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-card {
+                border-right: none;
+                border-bottom:
+                    1px solid rgba(255,255,255,0.15);
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-content {
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+        }
+
+        @media(max-width: 600px) {
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .benefit {
+                border-right: none;
+                border-bottom: 1px solid #e4ebf5;
+            }
+
+            .benefit:last-child {
+                border-bottom: none;
+            }
+
+            .feature-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 65px 5%;
+            }
+
+            .section-title h2,
+            .dashboard-text h2 {
+                font-size: 29px;
+            }
+
+            .cta {
+                width: 90%;
+                padding: 35px 25px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .copyright {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <a href="/" class="brand">
+
+        <div class="brand-icon">
+            ◉
+        </div>
+
+        Face<span>Attend</span>
+
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/about/">About</a>
+
+        <a href="/analysis/">Analysis</a>
+
+        <a href="/register/">Register Student</a>
+
+        <a href="/attendance/">Attendance</a>
+
+        <a href="/attendance/take/">Take Attendance</a>
+
+        <a href="/contact/">Contact</a>
+
+        <a href="/admin/" class="admin">
+            Admin Panel
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="dot dot1"></div>
+    <div class="dot dot2"></div>
+
+
+    <div class="hero-content">
+
+        <div class="badge">
+
+            <span class="badge-dot"></span>
+
+            AI Powered Attendance System
+
+        </div>
+
+
+        <h1>
+
+            Smart Attendance
+            <br>
+
+            With
+            <span>Facial Recognition</span>
+
+        </h1>
+
+
+        <p class="hero-text">
+
+            FaceAttend is a modern attendance management
+            system that uses facial recognition and computer
+            vision to identify students and automatically
+            record attendance.
+
+        </p>
+
+
+        <div class="buttons">
+
+            <a href="/register/" class="btn-primary">
+                Register Student →
+            </a>
+
+            <a href="/analysis/" class="btn-secondary">
+                Explore Analysis
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- FACE CARD -->
+
+    <div class="hero-visual">
+
+        <div class="face-card">
+
+            <div class="grid"></div>
+
+            <div class="verified">
+                ✓ VERIFIED
+            </div>
+
+            <div class="scan-ring"></div>
+
+            <div class="face-symbol">
+                👤
+            </div>
+
+            <div class="scan"></div>
+
+
+            <div class="result">
+
+                <div class="result-small">
+                    FACE DETECTED
+                </div>
+
+                <h3>
+                    Student Recognized
+                </h3>
+
+                <p>
+                    Attendance automatically recorded
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= BENEFITS ================= -->
+
+<section class="benefits">
+
+    <div class="benefit">
+
+        <div class="benefit-icon">
+            ⚡
+        </div>
+
+        <div>
+            <h4>Fast Recognition</h4>
+            <p>Identify students in seconds</p>
+        </div>
+
+    </div>
+
+
+    <div class="benefit">
+
+        <div class="benefit-icon">
+            ◎
+        </div>
+
+        <div>
+            <h4>Automatic Records</h4>
+            <p>No manual entry needed</p>
+        </div>
+
+    </div>
+
+
+    <div class="benefit">
+
+        <div class="benefit-icon">
+            🔒
+        </div>
+
+        <div>
+            <h4>Secure Database</h4>
+            <p>Safe & reliable records</p>
+        </div>
+
+    </div>
+
+
+    <div class="benefit">
+
+        <div class="benefit-icon">
+            ⚙
+        </div>
+
+        <div>
+            <h4>Easy Management</h4>
+            <p>Simple & user friendly</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="label">
+            Features
+        </div>
+
+        <h2>
+            Everything You Need for Smart Attendance
+        </h2>
+
+        <p>
+            FaceAttend brings student management,
+            facial recognition and attendance tracking
+            together in one simple platform.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                👤
+            </div>
+
+            <h3>
+                Facial Recognition
+            </h3>
+
+            <p>
+                Detect and recognize registered student
+                faces using computer vision technology.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📷
+            </div>
+
+            <h3>
+                Real-Time Camera
+            </h3>
+
+            <p>
+                Use the computer camera to detect students
+                during the attendance process.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Automatic Attendance
+            </h3>
+
+            <p>
+                Once a registered student is recognized,
+                attendance is automatically recorded.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🎓
+            </div>
+
+            <h3>
+                Student Management
+            </h3>
+
+            <p>
+                Manage student information and registered
+                face photographs from one system.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <h3>
+                Attendance Analysis
+            </h3>
+
+            <p>
+                Monitor daily attendance and view useful
+                attendance statistics.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🔒
+            </div>
+
+            <h3>
+                Secure Records
+            </h3>
+
+            <p>
+                Student and attendance information is
+                managed through the Django database.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= IMPACT ================= -->
+
+<section class="impact">
+
+    <div class="impact-title">
+
+        <h2>
+            Our Impact
+        </h2>
+
+        <p>
+            Smart technology for better attendance management
+        </p>
+
+    </div>
+
+
+    <div class="impact-grid">
+
+
+        <div class="impact-card">
+
+            <div class="impact-number">
+                AI
+            </div>
+
+            <p>
+                Facial Recognition
+            </p>
+
+        </div>
+
+
+        <div class="impact-card">
+
+            <div class="impact-number">
+                8:00 AM – 4:00 PM
+            </div>
+
+            <p>
+                Digital Records
+            </p>
+
+        </div>
+
+
+        <div class="impact-card">
+
+            <div class="impact-number">
+                100%
+            </div>
+
+            <p>
+                Centralized Management
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="label">
+            How It Works
+        </div>
+
+        <h2>
+            Attendance in Three Simple Steps
+        </h2>
+
+        <p>
+            The complete attendance process is simple,
+            fast and easy to manage.
+        </p>
+
+    </div>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Register Student
+            </h3>
+
+            <p>
+                Add student information and upload a
+                clear face photograph.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Detect & Recognize
+            </h3>
+
+            <p>
+                The camera detects the face and compares
+                it with registered student data.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Mark Attendance
+            </h3>
+
+            <p>
+                After successful recognition, attendance
+                is automatically stored with date and time.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section class="dashboard-section">
+
+    <div class="dashboard">
+
+
+        <div class="dashboard-text">
+
+            <div class="label">
+                Smart Management
+            </div>
+
+            <h2>
+                One System for Students & Attendance
+            </h2>
+
+            <p>
+                FaceAttend provides a centralized platform
+                for managing student information and
+                attendance records.
+            </p>
+
+
+            <ul class="checks">
+
+                <li>
+                    Student registration and management
+                </li>
+
+                <li>
+                    Facial recognition attendance
+                </li>
+
+                <li>
+                    Date and time based records
+                </li>
+
+                <li>
+                    Attendance analysis
+                </li>
+
+                <li>
+                    Django administration panel
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-head">
+
+                <strong>
+                    Recent Attendance
+                </strong>
+
+                <span class="live">
+                    ● LIVE SYSTEM
+                </span>
+
+            </div>
+
+
+            <div class="student-row">
+
+                <div class="student">
+
+                    <div class="avatar">
+                        👨
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Student 01
+                        </strong>
+
+                        <small>
+                            Face Recognized
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="present">
+                    Present
+                </div>
+
+            </div>
+
+
+            <div class="student-row">
+
+                <div class="student">
+
+                    <div class="avatar">
+                        👩
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Student 02
+                        </strong>
+
+                        <small>
+                            Face Recognized
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="present">
+                    Present
+                </div>
+
+            </div>
+
+
+            <div class="student-row">
+
+                <div class="student">
+
+                    <div class="avatar">
+                        👨‍🎓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Student 03
+                        </strong>
+
+                        <small>
+                            Face Recognized
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="present">
+                    Present
+                </div>
+
+            </div>
+
+
+            <div class="student-row">
+
+                <div class="student">
+
+                    <div class="avatar">
+                        👩‍🎓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Student 04
+                        </strong>
+
+                        <small>
+                            Face Recognized
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="present">
+                    Present
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <div>
+
+        <h2>
+            Make Attendance Smarter Today
+        </h2>
+
+        <p>
+            Register students and start using facial
+            recognition for a faster attendance process.
+        </p>
+
+    </div>
+
+
+    <a href="/register/">
+        Get Started →
+    </a>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-content">
+
+
+        <div class="footer-brand">
+
+            <h3>
+                FaceAttend
+            </h3>
+
+            <p>
+                A modern Facial Recognition Attendance
+                System designed for smart student
+                attendance management.
+            </p>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h4>
+                Quick Links
+            </h4>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/about/">
+                About
+            </a>
+
+            <a href="/contact/">
+                Contact
+            </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h4>
+                Platform
+            </h4>
+
+            <a href="/register/">
+                Student Management
+            </a>
+
+            <a href="/attendance/">
+                Attendance
+            </a>
+
+            <a href="/analysis/">
+                Analysis
+            </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h4>
+                Support
+            </h4>
+
+            <a href="/contact/">
+                Help & FAQ
+            </a>
+
+            <a href="#">
+                Terms & Conditions
+            </a>
+
+            <a href="#">
+                Privacy Policy
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        <span>
+            © 2026 FaceAttend. All rights reserved.
+        </span>
+
+        <span>
+            Facial Recognition Attendance System
+        </span>
+
+    </div>
+
+</footer>
+
+
+</body>
+</html>

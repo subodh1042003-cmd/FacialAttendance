@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Student | FaceAttend</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef5ff,
+                    #f8fbff
+                );
+            color: #10213b;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid #dbe7f5;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .back {
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 50px auto;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 40px;
+            box-shadow:
+                0 15px 40px rgba(30, 64, 175, 0.10);
+            border: 1px solid #e1ebf7;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+            color: #10213b;
+        }
+
+        .heading p {
+            color: #64748b;
+        }
+
+        .current-photo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .current-photo img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #dbeafe;
+        }
+
+        .photo-label {
+            margin-top: 10px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+            background: #f8fafc;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            background: #ffffff;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 32px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .save {
+            background: #2563eb;
+            color: white;
+        }
+
+        .save:hover {
+            background: #1d4ed8;
+        }
+
+        .cancel {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .cancel:hover {
+            background: #cbd5e1;
+        }
+
+        .hint {
+            margin-top: 8px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .heading h1 {
+                font-size: 28px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            FaceAttend
+        </div>
+
+        <a
+            href="{% url 'register_student' %}"
+            class="back"
+        >
+            ← Back to Students
+        </a>
+
+    </nav>
+
+
+    <main class="container">
+
+        <div class="card">
+
+            <div class="heading">
+
+                <h1>
+                    Edit Student
+                </h1>
+
+                <p>
+                    Update student information and profile photo
+                </p>
+
+            </div>
+
+
+            {% if student.photo %}
+
+            <div class="current-photo">
+
+                <img
+                    src="{{ student.photo.url }}"
+                    alt="{{ student.name }}"
+                >
+
+                <div class="photo-label">
+                    Current Profile Photo
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+            >
+
+                {% csrf_token %}
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Student Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value="{{ student.name }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="roll_number">
+                            Roll Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="roll_number"
+                            name="roll_number"
+                            value="{{ student.roll_number }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{ student.email }}"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="course">
+                            Course
+                        </label>
+
+                        <input
+                            type="text"
+                            id="course"
+                            name="course"
+                            value="{{ student.course }}"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="semester">
+                            Semester
+                        </label>
+
+                        <input
+                            type="text"
+                            id="semester"
+                            name="semester"
+                            value="{{ student.semester }}"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="photo">
+                            Change Photo
+                        </label>
+
+                        <input
+                            type="file"
+                            id="photo"
+                            name="photo"
+                            accept="image/*"
+                        >
+
+                        <div class="hint">
+                            Leave empty to keep the current photo.
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <a
+                        href="{% url 'register_student' %}"
+                        class="btn cancel"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn save"
+                    >
+                        💾 Save Changes
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

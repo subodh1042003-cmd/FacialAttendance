@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FaceAttend | About Us</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #172033;
+            background: #ffffff;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 76px;
+
+            padding: 0 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(255,255,255,0.95);
+
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid #e8edf5;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 25px;
+            font-weight: 800;
+
+            color: #111827;
+        }
+
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            color: white;
+
+            font-size: 19px;
+        }
+
+
+        .logo span {
+            color: #2563eb;
+        }
+
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #475569;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.2s;
+        }
+
+
+        .nav-links a:hover,
+        .nav-links .active {
+            color: #2563eb;
+        }
+
+
+        .nav-btn {
+            padding: 11px 19px;
+
+            border-radius: 9px;
+
+            background: #2563eb;
+
+            color: white !important;
+
+            box-shadow:
+                0 7px 18px rgba(37,99,235,0.22);
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            padding: 100px 7%;
+
+            text-align: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(37,99,235,0.10),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(79,70,229,0.08),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #f8fbff,
+                    #eef5ff
+                );
+        }
+
+
+        .hero-label {
+            display: inline-block;
+
+            padding: 8px 15px;
+
+            border-radius: 30px;
+
+            background: #dbeafe;
+
+            color: #1d4ed8;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            margin-bottom: 20px;
+        }
+
+
+        .hero h1 {
+            font-size: 52px;
+
+            letter-spacing: -1.5px;
+
+            color: #0f172a;
+
+            margin-bottom: 18px;
+        }
+
+
+        .hero h1 span {
+            color: #2563eb;
+        }
+
+
+        .hero p {
+            max-width: 760px;
+
+            margin: auto;
+
+            color: #64748b;
+
+            font-size: 17px;
+
+            line-height: 1.75;
+        }
+
+
+        /* ================= INTRO ================= */
+
+        .section {
+            padding: 90px 7%;
+        }
+
+
+        .intro {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                1.1fr
+                0.9fr;
+
+            gap: 60px;
+
+            align-items: center;
+        }
+
+
+        .intro-label {
+            color: #2563eb;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .intro h2 {
+            font-size: 38px;
+
+            color: #111827;
+
+            margin-bottom: 18px;
+        }
+
+
+        .intro p {
+            color: #64748b;
+
+            line-height: 1.75;
+
+            margin-bottom: 15px;
+        }
+
+
+        .intro-card {
+            padding: 38px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #172554,
+                    #2563eb
+                );
+
+            color: white;
+
+            box-shadow:
+                0 25px 55px rgba(37,99,235,0.22);
+        }
+
+
+        .intro-card-icon {
+            width: 70px;
+            height: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 25px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255,255,255,0.12);
+
+            font-size: 35px;
+        }
+
+
+        .intro-card h3 {
+            font-size: 24px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .intro-card p {
+            color: #dbeafe;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= MISSION ================= */
+
+        .mission {
+            background: #f8fafc;
+        }
+
+
+        .section-header {
+            max-width: 700px;
+
+            margin: 0 auto 50px;
+
+            text-align: center;
+        }
+
+
+        .section-label {
+            color: #2563eb;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-header h2 {
+            font-size: 38px;
+
+            color: #111827;
+
+            margin-bottom: 12px;
+        }
+
+
+        .section-header p {
+            color: #64748b;
+
+            line-height: 1.7;
+        }
+
+
+        .mission-grid {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+
+        .mission-card {
+            padding: 30px;
+
+            background: white;
+
+            border: 1px solid #e7edf5;
+
+            border-radius: 17px;
+
+            transition: 0.25s;
+        }
+
+
+        .mission-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 18px 40px rgba(15,23,42,0.08);
+        }
+
+
+        .mission-icon {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 13px;
+
+            background: #eff6ff;
+
+            font-size: 24px;
+        }
+
+
+        .mission-card h3 {
+            color: #111827;
+
+            margin-bottom: 10px;
+
+            font-size: 19px;
+        }
+
+
+        .mission-card p {
+            color: #64748b;
+
+            line-height: 1.65;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= TECHNOLOGY ================= */
+
+        .technology {
+            padding: 90px 7%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #172554
+                );
+
+            color: white;
+        }
+
+
+        .technology .section-header h2 {
+            color: white;
+        }
+
+
+        .technology .section-header p {
+            color: #94a3b8;
+        }
+
+
+        .tech-grid {
+            max-width: 1100px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .tech-card {
+            padding: 28px 20px;
+
+            text-align: center;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid rgba(255,255,255,0.10);
+
+            transition: 0.25s;
+        }
+
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+
+            background:
+                rgba(255,255,255,0.09);
+        }
+
+
+        .tech-icon {
+            font-size: 30px;
+
+            margin-bottom: 13px;
+        }
+
+
+        .tech-card h3 {
+            font-size: 17px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .tech-card p {
+            color: #94a3b8;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= WORKFLOW ================= */
+
+        .workflow {
+            max-width: 1150px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        .workflow-card {
+            text-align: center;
+
+            padding: 30px;
+        }
+
+
+        .workflow-number {
+            width: 58px;
+            height: 58px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 25px rgba(37,99,235,0.20);
+        }
+
+
+        .workflow-card h3 {
+            font-size: 19px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .workflow-card p {
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.65;
+        }
+
+
+        /* ================= WHY ================= */
+
+        .why {
+            background: #f8fafc;
+        }
+
+
+        .why-box {
+            max-width: 1100px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .why-item {
+            display: flex;
+
+            gap: 15px;
+
+            padding: 22px;
+
+            background: white;
+
+            border: 1px solid #e7edf5;
+
+            border-radius: 13px;
+        }
+
+
+        .why-check {
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: #dbeafe;
+
+            color: #2563eb;
+
+            font-weight: 900;
+        }
+
+
+        .why-item h3 {
+            font-size: 16px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .why-item p {
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.55;
+        }
+
+
+        /* ================= CTA ================= */
+
+        .cta {
+            margin: 0 7% 80px;
+
+            padding: 70px 30px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #172033,
+                    #1e3a8a
+                );
+
+            color: white;
+        }
+
+
+        .cta h2 {
+            font-size: 37px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .cta p {
+            color: #cbd5e1;
+
+            margin-bottom: 27px;
+        }
+
+
+        .cta a {
+            display: inline-block;
+
+            padding: 14px 26px;
+
+            border-radius: 9px;
+
+            background: white;
+
+            color: #1d4ed8;
+
+            text-decoration: none;
+
+            font-weight: 800;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            padding: 45px 7%;
+
+            background: #0f172a;
+
+            color: #94a3b8;
+        }
+
+
+        .footer-main {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 40px;
+
+            padding-bottom: 30px;
+
+            border-bottom: 1px solid #1e293b;
+        }
+
+
+        .footer-brand {
+            max-width: 360px;
+        }
+
+
+        .footer-brand h3 {
+            color: white;
+
+            font-size: 21px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .footer-brand p {
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        .footer-links {
+            display: flex;
+
+            gap: 55px;
+        }
+
+
+        .footer-column h4 {
+            color: white;
+
+            margin-bottom: 15px;
+
+            font-size: 14px;
+        }
+
+
+        .footer-column a {
+            display: block;
+
+            text-decoration: none;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+
+            margin-bottom: 9px;
+        }
+
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+
+        .footer-bottom {
+            padding-top: 25px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .intro {
+                grid-template-columns: 1fr;
+            }
+
+            .mission-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .tech-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .mission-grid,
+            .workflow,
+            .why-box {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-main {
+                flex-direction: column;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .hero {
+                padding: 75px 5%;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .section,
+            .technology {
+                padding: 65px 5%;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
+            .section-header h2,
+            .intro h2,
+            .cta h2 {
+                font-size: 30px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            ◉
+        </div>
+
+        Face<span>Attend</span>
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/about/" class="active">
+            About
+        </a>
+
+        <a href="/analysis/">
+            Analysis
+        </a>
+
+        <a href="/register/">
+            Register Student
+        </a>
+
+        <a href="/attendance/">
+            Attendance
+        </a>
+        <a href="/attendance/take/">Take Attendance</a>
+
+        <a href="/contact/">
+            Contact
+        </a>
+
+        <a href="/admin/" class="nav-btn">
+            Admin Panel
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-label">
+        ABOUT FACEATTEND
+    </div>
+
+
+    <h1>
+        Smarter Attendance.
+        <span>Better Management.</span>
+    </h1>
+
+
+    <p>
+        FaceAttend is a modern Facial Recognition Attendance System
+        designed to simplify student attendance using computer vision,
+        automation and digital record management.
+    </p>
+
+</section>
+
+
+<!-- ================= INTRODUCTION ================= -->
+
+<section class="section">
+
+    <div class="intro">
+
+
+        <div>
+
+            <div class="intro-label">
+                Our System
+            </div>
+
+
+            <h2>
+                A Modern Approach to Student Attendance
+            </h2>
+
+
+            <p>
+                Traditional attendance methods can be time-consuming
+                and require manual record keeping. FaceAttend provides
+                a smarter digital solution.
+            </p>
+
+
+            <p>
+                The system uses a camera to detect and recognize
+                registered student faces. After successful recognition,
+                the student's attendance is automatically recorded.
+            </p>
+
+
+            <p>
+                Student information, attendance records and system
+                statistics can be managed through a centralized
+                Django-based web application.
+            </p>
+
+        </div>
+
+
+        <div class="intro-card">
+
+            <div class="intro-card-icon">
+                👁️
+            </div>
+
+
+            <h3>
+                Intelligent Recognition
+            </h3>
+
+
+            <p>
+                FaceAttend combines facial detection, face recognition
+                and database management to create a complete automated
+                attendance workflow.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= MISSION ================= -->
+
+<section class="section mission">
+
+
+    <div class="section-header">
+
+        <div class="section-label">
+            Our Purpose
+        </div>
+
+
+        <h2>
+            Built to Make Attendance Simple
+        </h2>
+
+
+        <p>
+            The system focuses on speed, automation, organization
+            and easy access to attendance information.
+        </p>
+
+    </div>
+
+
+    <div class="mission-grid">
+
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Faster Process
+            </h3>
+
+            <p>
+                Reduce the time required for manual attendance
+                by automatically identifying registered students.
+            </p>
+
+        </div>
+
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+                🤖
+            </div>
+
+            <h3>
+                Intelligent Automation
+            </h3>
+
+            <p>
+                Use facial recognition technology to automate
+                the identification and attendance process.
+            </p>
+
+        </div>
+
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+                📊
+            </div>
+
+            <h3>
+                Better Records
+            </h3>
+
+            <p>
+                Maintain organized digital attendance records
+                containing student, date and time information.
+            </p>
+
+        </div>
+
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+                🎓
+            </div>
+
+            <h3>
+                Student Management
+            </h3>
+
+            <p>
+                Register and manage student information including
+                roll number, course, semester and face photograph.
+            </p>
+
+        </div>
+
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+                📈
+            </div>
+
+            <h3>
+                Easy Analysis
+            </h3>
+
+            <p>
+                View attendance statistics and monitor attendance
+                activity through the analysis section.
+            </p>
+
+        </div>
+
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+                🔐
+            </div>
+
+            <h3>
+                Centralized Control
+            </h3>
+
+            <p>
+                Manage students and attendance records from one
+                centralized Django administration system.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= TECHNOLOGY ================= -->
+
+<section class="technology">
+
+
+    <div class="section-header">
+
+        <div class="section-label">
+            Technology
+        </div>
+
+
+        <h2>
+            Technologies Behind FaceAttend
+        </h2>
+
+
+        <p>
+            A combination of web development, computer vision
+            and database technologies powers the system.
+        </p>
+
+    </div>
+
+
+    <div class="tech-grid">
+
+
+        <div class="tech-card">
+
+            <div class="tech-icon">
+                🐍
+            </div>
+
+            <h3>
+                Python
+            </h3>
+
+            <p>
+                Core programming language
+            </p>
+
+        </div>
+
+
+        <div class="tech-card">
+
+            <div class="tech-icon">
+                🌐
+            </div>
+
+            <h3>
+                Django
+            </h3>
+
+            <p>
+                Web application framework
+            </p>
+
+        </div>
+
+
+        <div class="tech-card">
+
+            <div class="tech-icon">
+                👁️
+            </div>
+
+            <h3>
+                OpenCV
+            </h3>
+
+            <p>
+                Computer vision technology
+            </p>
+
+        </div>
+
+
+        <div class="tech-card">
+
+            <div class="tech-icon">
+                🗄️
+            </div>
+
+            <h3>
+                SQLite
+            </h3>
+
+            <p>
+                Database management
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= WORKFLOW ================= -->
+
+<section class="section">
+
+
+    <div class="section-header">
+
+        <div class="section-label">
+            Workflow
+        </div>
+
+
+        <h2>
+            How FaceAttend Works
+        </h2>
+
+
+        <p>
+            From student registration to attendance recording,
+            the complete workflow is simple.
+        </p>
+
+    </div>
+
+
+    <div class="workflow">
+
+
+        <div class="workflow-card">
+
+            <div class="workflow-number">
+                01
+            </div>
+
+            <h3>
+                Student Registration
+            </h3>
+
+            <p>
+                Student details and a clear face photograph
+                are added to the system.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-card">
+
+            <div class="workflow-number">
+                02
+            </div>
+
+            <h3>
+                Face Recognition
+            </h3>
+
+            <p>
+                The camera detects the face and compares it
+                with registered face information.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-card">
+
+            <div class="workflow-number">
+                03
+            </div>
+
+            <h3>
+                Attendance Recording
+            </h3>
+
+            <p>
+                After successful recognition, attendance is
+                stored with the current date and time.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= WHY FACEATTEND ================= -->
+
+<section class="section why">
+
+
+    <div class="section-header">
+
+        <div class="section-label">
+            Why FaceAttend
+        </div>
+
+
+        <h2>
+            Designed for Easy Management
+        </h2>
+
+
+        <p>
+            A clean system that brings essential attendance
+            management functions together.
+        </p>
+
+    </div>
+
+
+    <div class="why-box">
+
+
+        <div class="why-item">
+
+            <div class="why-check">
+                ✓
+            </div>
+
+            <div>
+
+                <h3>
+                    Automated Attendance
+                </h3>
+
+                <p>
+                    Attendance can be recorded automatically
+                    after successful face recognition.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="why-item">
+
+            <div class="why-check">
+                ✓
+            </div>
+
+            <div>
+
+                <h3>
+                    Real-Time Camera
+                </h3>
+
+                <p>
+                    The system can use the computer camera
+                    for real-time face detection.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="why-item">
+
+            <div class="why-check">
+                ✓
+            </div>
+
+            <div>
+
+                <h3>
+                    Organized Database
+                </h3>
+
+                <p>
+                    Student and attendance information is
+                    stored in a structured database.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="why-item">
+
+            <div class="why-check">
+                ✓
+            </div>
+
+            <div>
+
+                <h3>
+                    Admin Panel
+                </h3>
+
+                <p>
+                    Administrators can manage system records
+                    through the Django Admin Panel.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="why-item">
+
+            <div class="why-check">
+                ✓
+            </div>
+
+            <div>
+
+                <h3>
+                    Attendance Analysis
+                </h3>
+
+                <p>
+                    Attendance statistics can be reviewed
+                    through the analysis page.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="why-item">
+
+            <div class="why-check">
+                ✓
+            </div>
+
+            <div>
+
+                <h3>
+                    Responsive Interface
+                </h3>
+
+                <p>
+                    The interface is designed to work across
+                    desktop and mobile screen sizes.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+
+    <h2>
+        Ready for Smarter Attendance?
+    </h2>
+
+
+    <p>
+        Register students and start using the FaceAttend system.
+    </p>
+
+
+    <a href="/register/">
+        Register Student →
+    </a>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+
+    <div class="footer-main">
+
+
+        <div class="footer-brand">
+
+            <h3>
+                FaceAttend
+            </h3>
+
+            <p>
+                A modern Facial Recognition Attendance System
+                for smart and automated student attendance management.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Platform
+                </h4>
+
+                <a href="/">
+                    Home
+                </a>
+
+                <a href="/about/">
+                    About
+                </a>
+
+                <a href="/analysis/">
+                    Analysis
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Management
+                </h4>
+
+                <a href="/register/">
+                    Register Student
+                </a>
+
+                <a href="/attendance/">
+                    Attendance
+                </a>
+
+                <a href="/admin/">
+                    Admin Panel
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Support
+                </h4>
+
+                <a href="/contact/">
+                    Contact Us
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 FaceAttend. All rights reserved.
+        </span>
+
+        <span>
+            Facial Recognition Attendance System
+        </span>
+
+    </div>
+
+
+</footer>
+
+
+</body>
+
+</html>

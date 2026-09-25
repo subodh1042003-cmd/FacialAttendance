@@ -1,0 +1,12 @@
+RENDER DEPLOYMENT
+
+Build Command:
+pip install -r requirements.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput
+
+Start Command:
+gunicorn faceattendance.wsgi:application --bind 0.0.0.0:$PORT --timeout 120
+
+Important:
+- This project uses SQLite, which is suitable for a demo but is not persistent across all Render redeploy/restart scenarios.
+- Student photos/media also need persistent storage for a production system.
+- Browser camera access requires HTTPS; Render provides HTTPS on the live service.
